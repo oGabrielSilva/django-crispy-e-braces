@@ -1,0 +1,31 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Deletando registros</title>
+{% endblock %}
+
+{% block card %}
+    <div class="container mt-5">
+        <div class="my-5">
+            <h2>
+                Deletar registro
+            </h2>
+            <p class="lead">
+                Confirme para deletar permanetemente.
+            </p>
+            <hr>
+        </div>
+        <form method="POST">
+            <p class="mb-5">
+                Você dejesa excluir o registro: <strong>{{ object }}</strong>? <br>
+            </p>
+            {% csrf_token %}
+    
+            {{ form.as_p }}
+    
+            <button type="submit" class="btn btn-danger">Deletar</button>
+            <a href="{% url 'index' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}

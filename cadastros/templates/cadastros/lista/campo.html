@@ -1,0 +1,55 @@
+{% extends 'paginas/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>
+    Lista de Campo
+</title>
+{% endblock %}
+
+{% block card %}
+<div class="container mt-5">
+    <h2>
+        Lista de Campos registrados
+    </h2>
+    <hr>
+    <div class="table-responsive mt-5">
+        <table class="table table-hover">
+            <caption>
+                <a href="{% url 'cadastrar-campo' %}" class="btn btn-outline-info btn-sm">Novo Campo</a>
+            </caption>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Servidor</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            {% for campo in object_list %}
+            <tr>
+                <td>{{ campo.pk }}</td>
+                <td>{{ campo.nome }}</td>
+                <td>{{ campo.descricao }}</td>
+                <td>{{ campo.servidor }}</td>
+                <td>
+                    <a href="{% url 'editar-campo' campo.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'delete-campo' campo.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">
+                    Nenhum campo registrado
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
